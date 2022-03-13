@@ -70,9 +70,25 @@ public static function getByKey($key)
     $stmt=DatabaseHandler::factory()->prepare($sql);
     if($stmt->execute())
     {
-        $obj=$stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class());
-        return $obj? array_shift($obj):false;
+        return $obj=$stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class());
+       return $obj? array_shift($obj):false;
     }
     return false;
 }
+
+
+public static function getAllByKey($key)
+{
+    $sql='select * from '.static::$tableName.' where '.static::$primaryKey.'='.$key;
+    $stmt=DatabaseHandler::factory()->prepare($sql);
+    if($stmt->execute())
+    {
+        return $obj=$stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE,get_called_class());
+       // return $obj? array_shift($obj):false;
+    }
+    return false;
+}
+
+
+
 }
