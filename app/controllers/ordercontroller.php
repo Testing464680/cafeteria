@@ -16,7 +16,7 @@ class OrderController extends AbstractController
         foreach($this->data['orders'] as $row)
         {
         
-          array_push($arr,OrderDetailsModel::getBykey($row->id));
+          array_push($arr,OrderDetailsModel::getAllBykey($row->id));
           
         }
 
